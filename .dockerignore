@@ -10,7 +10,7 @@ README.md
 **/readme.md
 **/LICENSE
 .vscode/
-makefile
+#makefile
 CONTRIBUTING.md
 _config.yml
 

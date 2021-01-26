@@ -12,7 +12,7 @@ IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
 
 .DEFAULT_GOAL := help
 
-help:  ## This help message :)
+help:  ## This help message 😃
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 lint:  ## Lint & format, will not fix but sets exit code on error
@@ -31,22 +31,28 @@ push:  ## Push container image to registry
 	docker push $(IMAGE_PREFIX):$(IMAGE_TAG)
 
 build-server: proto-go  ## Run a build of server binary
-	go build -o ./bin/server $(SERVER_DIR)/...
+	GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build -o ./bin/server $(SERVER_DIR)/...
 
 run-server: proto-go  ## Run server locally, with hot reload
 	air -c .air.toml
 
 build-client-go: proto-go  ## Run a build of Go client binary
-	go build -o ./bin/client $(CLIENT_GO_DIR)/...
+	GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build -o ./bin/client $(CLIENT_GO_DIR)/...
 
 run-client-go: proto-go  ## Run Go client locally, with hot reload
 	air -c .air.toml
 
-proto-go:  ## Compile API protocol for Go
+proto-go:  ## Compile API bindings for Go
 	protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative ./api/hello.proto
 
-proto-python:  .venv  ## Compile API protocol for Python
+proto-python:  .venv  ## Compile API bindings for Python
 	python -m grpc_tools.protoc --proto_path=./api  --python_out=./api --grpc_python_out=./api hello.proto
+
+clean:  ## Tidy up!
+	@rm -rf .venv
+	@rm bin/server
+	@rm bin/client
+	@rm api/*.go; rm api/*.py
 
 .venv: .venv/touchfile
 

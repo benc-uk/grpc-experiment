@@ -6,11 +6,10 @@ import (
 	"log"
 	"net"
 
+	"github.com/benc-uk/go-starter/pkg/envhelper"
 	"github.com/benc-uk/grpc-experiment/api"
 	"google.golang.org/grpc"
 )
-
-const port = "50051"
 
 // server is used to implement the service
 type server struct {
@@ -18,7 +17,10 @@ type server struct {
 }
 
 func main() {
-	listener, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
+	// Port to listen on, change the default as you see fit
+	serverPort := envhelper.GetEnvInt("PORT", 50051)
+
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", serverPort))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -31,7 +33,7 @@ func main() {
 		log.Printf("### '%s' server registered", srvName)
 	}
 
-	log.Printf("### Starting server on %s\n", port)
+	log.Printf("### Starting server on %d\n", serverPort)
 	if err := srv.Serve(listener); err != nil {
 		log.Fatalf("### Failed to serve: %v", err)
 	}

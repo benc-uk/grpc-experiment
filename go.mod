@@ -3,7 +3,7 @@ module github.com/benc-uk/grpc-experiment
 go 1.15
 
 require (
-	github.com/davecgh/go-spew v1.1.0
+	github.com/benc-uk/go-starter v1.0.0
 	github.com/golang/protobuf v1.4.3
 	google.golang.org/grpc v1.35.0
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0 // indirect
