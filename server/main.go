@@ -9,6 +9,7 @@ import (
 	"github.com/benc-uk/go-starter/pkg/envhelper"
 	"github.com/benc-uk/grpc-experiment/api"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 // server is used to implement the service
@@ -28,6 +29,7 @@ func main() {
 	// Register new server
 	srv := grpc.NewServer()
 	api.RegisterHelloServer(srv, &server{})
+	reflection.Register(srv)
 
 	for srvName := range srv.GetServiceInfo() {
 		log.Printf("### '%s' server registered", srvName)

@@ -40,7 +40,7 @@ build-client-go: proto-go  ## Run a build of Go client binary
 	GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build -o ./bin/client $(CLIENT_GO_DIR)/...
 
 run-client-go: proto-go  ## Run Go client locally, with hot reload
-	air -c .air.toml
+	go run ./client-go/main.go
 
 proto-go:  ## Compile API bindings for Go
 	protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative ./api/hello.proto
@@ -50,9 +50,9 @@ proto-python:  .venv  ## Compile API bindings for Python
 
 clean:  ## Tidy up!
 	@rm -rf .venv
-	@rm bin/server
-	@rm bin/client
-	@rm api/*.go; rm api/*.py
+	@rm -rf bin/server
+	@rm -rf bin/client
+	@rm -rf api/*.go; rm -rf api/*.py; rm -rf api/__pycache__
 
 .venv: .venv/touchfile
 

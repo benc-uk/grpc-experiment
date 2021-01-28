@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grpc-server
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    name: grpc-server
+spec:
+  # Note. You *MUST* have a TLS enabled on the ingress or gRPC will not work
+  # https://github.com/kubernetes/ingress-nginx/issues/4095#issuecomment-506736342
+  tls:
+    - secretName: kube-benco-io-cert
+      hosts:
+        - grpc.kube.benco.io
+  rules:
+    - host: grpc.kube.benco.io
+      http:
+        paths:
+          - backend:
+              serviceName: grpc-server
+              servicePort: grpc
