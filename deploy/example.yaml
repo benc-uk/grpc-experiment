@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: echoapi
+  labels:
+    name: echoapi
+spec:
+  rules:
+    - host: echoapi.aks.spid.svil.poste.it
+      http:
+        paths:
+          - backend:
+              serviceName: echo-api-service
+              servicePort: http
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana
+  labels:
+    name: grafana
+spec:
+  rules:
+    - host: grafana.aks.spid.svil.poste.it
+      http:
+        paths:
+          - backend:
+              service:
+                name: grafana-service
+                port: 3000

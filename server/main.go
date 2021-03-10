@@ -29,6 +29,7 @@ func main() {
 	// Register new server
 	srv := grpc.NewServer()
 	api.RegisterHelloServer(srv, &server{})
+	// This magic
 	reflection.Register(srv)
 
 	for srvName := range srv.GetServiceInfo() {

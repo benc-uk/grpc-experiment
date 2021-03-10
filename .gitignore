@@ -167,3 +167,5 @@ api/**
 # Binaries also bad
 bin/**
 !bin/.placeholder
+scripts/cert.pem
+scripts/cert.key

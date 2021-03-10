@@ -11,7 +11,8 @@ spec:
   # Note. You *MUST* have a TLS enabled on the ingress or gRPC will not work
   # https://github.com/kubernetes/ingress-nginx/issues/4095#issuecomment-506736342
   tls:
-    - secretName: kube-benco-io-cert
+    - secretName: self-signed
+      #- secretName: kube-benco-io-cert
       hosts:
         - grpc.kube.benco.io
   rules:

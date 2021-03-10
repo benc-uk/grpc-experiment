@@ -6,7 +6,7 @@ CLIENT_GO_DIR := ./client-go
 
 # Most likely want to override these when calling `make image`
 IMAGE_REG ?= ghcr.io
-IMAGE_REPO ?= benc-uk/grpc-demoapp
+IMAGE_REPO ?= benc-uk/grpc-echoserver
 IMAGE_TAG ?= latest
 IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
 
@@ -22,7 +22,7 @@ lint-fix:  ## Lint & format, will try to fix errors and modify code
 	go get github.com/golangci/golangci-lint/cmd/golangci-lint && golangci-lint run $(SERVER_DIR)/... --fix 
 
 image:  ## Build container image from Dockerfile
-	docker build  --file ./build/Dockerfile \
+	docker build --file ./build/Dockerfile \
 	--build-arg BUILD_INFO="$(BUILD_INFO)" \
 	--build-arg VERSION="$(VERSION)" \
 	--tag $(IMAGE_PREFIX):$(IMAGE_TAG) . 
