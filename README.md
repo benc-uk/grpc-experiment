@@ -46,46 +46,39 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+# Use Make
 
-# Configuration
+Make is the "frontend" for working locally with this repo
 
-Environmental variables
-
-| Setting / Variable | Purpose                         | Default |
-| ------------------ | ------------------------------- | ------- |
-| PORT               | Port the server will listen on. | 8000    |
+```text
+$ make
+build-client-go      Run a build of Go client binary, into ./bin
+build-server         Run a build of server binary, into ./bin
+clean                Tidy up!
+help                 This help message 😃
+lint-fix             Lint & format, will try to fix errors and modify code
+lint                 Lint & format, will not fix but sets exit code on error
+proto-go             Compile API bindings for Go, into ./api
+proto-python         Compile API bindings for Python, into ./api
+run-client-go        Run Go client locally, with hot reload
+run-server           Run server locally, with hot reload
+```
 
 # Repository Structure
 
 A brief description of the top-level directories of this project is as follows:
 
-```
-/api        - Details of the API specification & docs
-/build      - Build configuration e.g. Dockerfiles
-/charts     - Helm charts
-/deploy     - Deployment and infrastructure as code, inc Kubernetes
-/scripts    - Bash and other supporting scripts
-/src        - Source code
-/test       - Testing, mock data and API + load tests
+```text
+📂
+├── api            - Proto definition and holds auto-gen code
+├── build          - Dockerfiles
+├── client-go      - Client written in Go
+├── client-python  - Client written in Python
+├── deploy         - Some Kubernetes manifests
+└── server         - Server in Go
 ```
 
 # API
 
 See the [API documentation](./api/) for full infomration about the API(s).  
 Optional. Delete this section if project as no API.
-
-# Known Issues
-
-List any known bugs or gotchas.
-
-# Change Log
-
-See [complete change log](./CHANGELOG.md)
-
-# License
-
-This project uses the MIT software license. See [full license file](./LICENSE)
-
-# Acknowledgements
-
-Optional. Put acknowledgements and credits here, if any

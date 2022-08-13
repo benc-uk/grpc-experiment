@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: grpc-server
-          image: ghcr.io/benc-uk/grpc-echoserver:latest
+          image: ghcr.io/benc-uk/grpc-experiment:latest
           resources:
             limits:
               memory: "128Mi"

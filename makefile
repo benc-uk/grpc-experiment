@@ -4,6 +4,11 @@ BUILD_INFO := Manual build
 SERVER_DIR := ./server
 CLIENT_GO_DIR := ./client-go
 
+# Most likely want to override these when calling `make image`
+IMAGE_REG ?= ghcr.io
+IMAGE_REPO ?= benc-uk/grpc-experiment
+IMAGE_TAG ?= latest
+IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
 
 .DEFAULT_GOAL := help
 
@@ -31,7 +36,7 @@ run-client-go: proto-go  ## Run Go client locally, with hot reload
 run-client-python:
 	export PYTHONPATH=$$PYTHONPATH:$(pwd)/api
 	python3 client-python/client.py
-	
+
 proto-go:  ## Compile API bindings for Go
 	protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative ./api/hello.proto
 

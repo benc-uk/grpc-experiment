@@ -37,6 +37,7 @@ func main() {
 	}
 
 	log.Printf("### Starting server on %d\n", serverPort)
+
 	if err := srv.Serve(listener); err != nil {
 		log.Fatalf("### Failed to serve: %v", err)
 	}

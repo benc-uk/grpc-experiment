@@ -1,10 +1,8 @@
-linters-settings:
-  golint:
-    min-confidence: 0
 linters:
   enable:
     - revive
     - gofmt
-issues:
-  include:
-    - EXC0002
+    - wsl
+    - deadcode
+    - cyclop
+    - stylecheck
