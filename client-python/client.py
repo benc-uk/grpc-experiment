@@ -3,8 +3,8 @@ import logging
 
 import grpc
 
-import hello_pb2
-import hello_pb2_grpc
+from api import hello_pb2
+from api import hello_pb2_grpc
 
 def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
@@ -12,7 +12,7 @@ def run():
     # of the code.
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = hello_pb2_grpc.HelloStub(channel)
-        response = stub.SayHello(hello_pb2.HelloRequest(name='you'))
+        response = stub.SayHello(hello_pb2.HelloRequest(name='Sad Ken'))
     print("Greeter client received: " + response.message)
 
 
