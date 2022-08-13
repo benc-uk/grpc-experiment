@@ -32,7 +32,7 @@ Notes on running the project from Docker image / container
 
 Install `protoc`, `protoc-gen-go`, `protoc-gen-go-grpc` and `air`
 
-```
+```bash
 sudo apt install protobuf-compiler
 go get google.golang.org/protobuf/cmd/protoc-gen-go \
 google.golang.org/grpc/cmd/protoc-gen-go-grpc
@@ -41,11 +41,12 @@ go get -u github.com/cosmtrek/air
 
 Python prereq
 
-```
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
 # Use Make
 
 Make is the "frontend" for working locally with this repo
